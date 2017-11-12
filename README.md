@@ -24,7 +24,8 @@ yarn add unicode-regex
 const get_unicode_regex = require('unicode-regex');
 
 const regex = unicode_regex(['Pc', 'Pd', 'Pe', 'Pf', 'Pi', 'Po', 'Ps']);
-regex.test('"'); //=> false
+regex.test('a'); //=> false
+regex.test('"'); //=> true
 regex.test('“'); //=> true
 ```
 
