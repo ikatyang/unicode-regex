@@ -22,9 +22,17 @@ export function build_regex(ranges: Range[], flag?: string) {
     .map(
       ([start, end]) =>
         start === end
-          ? `\\u${start.toString(16)}`
-          : `\\u${start.toString(16)}-\\u${end.toString(16)}`,
+          ? `\\u${get_hex(start)}`
+          : `\\u${get_hex(start)}-\\u${get_hex(end)}`,
     )
     .join('');
   return new RegExp(`[${pattern}]`, flag);
+}
+
+function get_hex(char_code: number) {
+  let hex = char_code.toString(16);
+  while (hex.length < 4) {
+    hex = `0${hex}`;
+  }
+  return hex;
 }

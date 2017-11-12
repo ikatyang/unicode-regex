@@ -25,8 +25,11 @@ fs.readdirSync(category_dirname).forEach(raw_category => {
   const id = `${category_dirname}/${category}`;
   const data: { [char_code: number]: CharData } = require(id);
 
-  Object.keys(data).forEach(char_code => {
-    char_codes.push(+char_code);
+  Object.keys(data).forEach(raw_char_code => {
+    const char_code = +raw_char_code;
+    if (char_code >= 0 && char_code <= 0xffff) {
+      char_codes.push(char_code);
+    }
   });
 
   const ranges = normalize_ranges(
