@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`throw if no category 1`] = `"Expected at least one category, but received 0."`;
+
+exports[`throw if no sub category 1`] = `"Expected at least one sub category, but received 0."`;
