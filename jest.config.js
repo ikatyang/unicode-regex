@@ -7,6 +7,7 @@ module.exports = {
   coverageReporters: ['lcov', 'text-summary'],
   collectCoverage: !!process.env.CI,
   collectCoverageFrom: ['src/**/*.ts'],
+  coveragePathIgnorePatterns: ["generated"],
   coverageThreshold: {
     global: {
       branches: 100,

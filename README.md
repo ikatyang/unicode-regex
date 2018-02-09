@@ -21,13 +21,25 @@ yarn add unicode-regex
 ## Usage
 
 ```js
-const get_unicode_regex = require('unicode-regex');
+const unicode = require('unicode-regex');
 
-const regex = unicode_regex(['Pc', 'Pd', 'Pe', 'Pf', 'Pi', 'Po', 'Ps']);
+const regex = unicode({ General_Category: ['Punctuation'] }).toRegExp();
 regex.test('a'); //=> false
 regex.test('"'); //=> true
 regex.test('“'); //=> true
 ```
+
+## API
+
+```ts
+declare function unicode(categories: {
+  [category: string]: SubCategory[];
+}): Charset;
+```
+
+Returns a [Charset](https://github.com/ikatyang/regexp-util#charset) for further processing, e.g. union, intersect, etc.
+
+(Data from [`node-unicode-data`](https://github.com/mathiasbynens/node-unicode-data))
 
 ## Development
 

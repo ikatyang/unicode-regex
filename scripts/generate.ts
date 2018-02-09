@@ -1,59 +1,64 @@
+import del = require('del');
 import * as fs from 'fs';
+import mkdir = require('make-dir');
 import * as path from 'path';
-import { normalize_ranges } from '../src/utils';
+import { format } from 'prettier';
+import { Charset, CharsetDataUnit } from 'regexp-util';
 
-const dist_filename = process.argv[2];
+const data_id = 'unicode-10.0.0';
 
-interface CharData {
-  category: string;
-}
-interface CategoryData {
-  category: string;
-  ranges: [number, number][];
-}
+// tslint:disable-next-line:no-var-requires
+const category_maps: Record<string, string[]> = require(data_id);
+const src_dirname = path.resolve(__dirname, '../src');
 
-const category_dirname = path.resolve(
-  __dirname,
-  '../node_modules/unicode/category',
-);
-const category_database: CategoryData[] = [];
+/* ----------------------------- types.generated ---------------------------- */
 
-fs.readdirSync(category_dirname).forEach(raw_category => {
-  const category = path.basename(raw_category, '.js');
-  const char_codes: number[] = [];
-
-  const id = `${category_dirname}/${category}`;
-  const data: { [char_code: number]: CharData } = require(id);
-
-  Object.keys(data).forEach(raw_char_code => {
-    const char_code = +raw_char_code;
-    if (char_code >= 0 && char_code <= 0xffff) {
-      char_codes.push(char_code);
-    }
-  });
-
-  const ranges = normalize_ranges(
-    char_codes.map<[number, number]>(x => [x, x]),
-  );
-
-  category_database.push({ category, ranges });
-});
-
+const types_filename = path.join(src_dirname, 'types.generated.ts');
 fs.writeFileSync(
-  dist_filename,
-  [
-    '// tslint:disable',
-    `export type Category = ${category_database
-      .map(category_data => JSON.stringify(category_data.category))
-      .join('|')};`,
-    `export const get_data = (): Record<Category, [number, number][]> => (${JSON.stringify(
-      category_database.reduce(
-        (current, category_data) => ({
-          ...current,
-          [category_data.category]: category_data.ranges,
-        }),
-        {},
-      ),
-    )});`,
-  ].join('\n'),
+  types_filename,
+  format(
+    `// tslint:disable\nexport interface Category {${Object.keys(category_maps)
+      .map(category => {
+        const sub_categories = category_maps[category];
+        return `${JSON.stringify(category)}: Array<${
+          sub_categories.length === 0
+            ? 'never'
+            : sub_categories.map(x => JSON.stringify(x)).join('|')
+        }>`;
+      })
+      .join(';')}}`,
+    { parser: 'typescript' },
+  ),
 );
+
+/* ----------------------------- data.generated ----------------------------- */
+
+const data_dirname = path.join(src_dirname, 'data.generated');
+del.sync(data_dirname);
+mkdir.sync(data_dirname);
+
+for (const category of Object.keys(category_maps)) {
+  const sub_dirname = path.join(data_dirname, category);
+  fs.mkdirSync(sub_dirname);
+
+  for (const sub_category of category_maps[category]) {
+    const filename = path.join(sub_dirname, sub_category);
+    let content = new Charset();
+
+    // tslint:disable-next-line:no-var-requires
+    const data = require(`${data_id}/${category}/${sub_category}/code-points`);
+    const batch = 1000;
+    for (let i = 0; i < data.length; i += batch) {
+      content = content.union(...data.slice(i, i + batch));
+    }
+
+    fs.writeFileSync(
+      `${filename}.json`,
+      JSON.stringify(
+        content.data.map(
+          ([start, end]) => (start === end ? start : [start, end]),
+        ),
+      ),
+    );
+  }
+}
