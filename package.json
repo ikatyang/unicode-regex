@@ -27,7 +27,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "regexp-util": "^1.1.0"
+    "regexp-util": "^1.2.0"
   },
   "devDependencies": {
     "@types/del": "3.0.0",
