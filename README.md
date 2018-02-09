@@ -23,7 +23,7 @@ yarn add unicode-regex
 ```js
 const unicode = require('unicode-regex');
 
-const regex = unicode({ General_Category: ['Punctuation'] }).toRegExp('u');
+const regex = unicode({ General_Category: ['Punctuation'] }).toRegExp();
 regex.test('a'); //=> false
 regex.test('"'); //=> true
 regex.test('“'); //=> true
