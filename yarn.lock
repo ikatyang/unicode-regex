@@ -3248,9 +3248,9 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-unicode-10.0.0@0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/unicode-10.0.0/-/unicode-10.0.0-0.7.4.tgz#05e82c0ba30c0db01ae7d93f2ea8e2a8a1624b55"
+unicode-10.0.0@0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/unicode-10.0.0/-/unicode-10.0.0-0.7.5.tgz#7f67a1fb5cb295db843e91180fe63aa6241b312c"
 
 universalify@^0.1.0:
   version "0.1.1"
