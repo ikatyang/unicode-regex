@@ -4,7 +4,7 @@
 [![build](https://img.shields.io/travis/ikatyang/unicode-regex/master.svg)](https://travis-ci.org/ikatyang/unicode-regex/builds)
 [![coverage](https://img.shields.io/codecov/c/github/ikatyang/unicode-regex/master.svg)](https://codecov.io/gh/ikatyang/unicode-regex)
 
-regular expression for matching [unicode category](http://unicode.org/reports/tr44/#GC_Values_Table) (data from [`unicode`](https://www.npmjs.com/package/unicode))
+regular expression for matching unicode category.
 
 [Changelog](https://github.com/ikatyang/unicode-regex/blob/master/CHANGELOG.md)
 
