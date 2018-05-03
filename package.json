@@ -33,7 +33,7 @@
     "@types/del": "3.0.1",
     "@types/jest": "21.1.10",
     "@types/make-dir": "1.0.3",
-    "@types/node": "8.10.11",
+    "@types/node": "9.6.11",
     "@types/prettier": "1.12.0",
     "del": "3.0.0",
     "jest": "21.2.1",
