@@ -54,6 +54,7 @@
     "node": ">= 4"
   },
   "files": [
-    "/lib/**/*"
+    "/lib/**/*",
+    "/LICENSE-3RD-PARTY.txt"
   ]
 }
