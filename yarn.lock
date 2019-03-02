@@ -38,9 +38,9 @@
   version "10.12.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.5.tgz#7e7ea1a9b34d2c8d704cb0b755dffbcda34741ad"
 
-"@types/node@8.10.40":
-  version "8.10.40"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.40.tgz#4314888d5cd537945d73e9ce165c04cc550144a4"
+"@types/node@8.10.42":
+  version "8.10.42"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.42.tgz#d3d8e738e13540a09b3f4a714dac1ffbf8939f7d"
 
 "@types/prettier@1.16.1":
   version "1.16.1"
