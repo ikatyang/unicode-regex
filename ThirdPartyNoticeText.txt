@@ -1,3 +1,9 @@
+This project incorporates third party material from the projects listed below.
+The original copyright notice and the license under which we received such third
+party material are set forth below.
+
+================================================================================
+
 https://github.com/mathiasbynens/node-unicode-data
 
 Copyright Mathias Bynens <https://mathiasbynens.be/>

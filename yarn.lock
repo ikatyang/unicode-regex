@@ -3681,9 +3681,10 @@ uglify-js@^3.1.4:
     commander "~2.20.0"
     source-map "~0.6.1"
 
-unicode-10.0.0@0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/unicode-10.0.0/-/unicode-10.0.0-0.7.5.tgz#7f67a1fb5cb295db843e91180fe63aa6241b312c"
+unicode-12.1.0@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/unicode-12.1.0/-/unicode-12.1.0-0.8.0.tgz#260f6dd899eefd42a8eae550bcbb62654c90c79d"
+  integrity sha512-OhxidkE3tKlMAouqWtdYtDP2RHVIo1lNdjEruNdVxLrACcbw79TaOcupYKxz6F7ldC1nx8CDygzN5kGmXAU60Q==
 
 union-value@^1.0.0:
   version "1.0.0"

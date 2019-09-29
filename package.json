@@ -48,13 +48,13 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "2.9.2",
-    "unicode-10.0.0": "0.7.5"
+    "unicode-12.1.0": "0.8.0"
   },
   "engines": {
     "node": ">= 4"
   },
   "files": [
     "/lib/**/*",
-    "/LICENSE-3RD-PARTY.txt"
+    "/ThirdPartyNoticeText.txt"
   ]
 }
