@@ -5,7 +5,9 @@ import * as path from 'path';
 import { format } from 'prettier';
 import { Charset, CharsetDataUnit } from 'regexp-util';
 
-const data_id = 'unicode-10.0.0';
+const data_id = 'unicode-12.1.0';
+
+const is_supported = (category: string) => category !== 'Sequence_Property';
 
 // tslint:disable-next-line:no-var-requires
 const category_maps: Record<string, string[]> = require(data_id);
@@ -18,6 +20,7 @@ fs.writeFileSync(
   types_filename,
   format(
     `// tslint:disable\nexport interface Category {${Object.keys(category_maps)
+      .filter(is_supported)
       .map(category => {
         const sub_categories = category_maps[category];
         return `${JSON.stringify(category)}: Array<${
@@ -37,7 +40,7 @@ const data_dirname = path.join(src_dirname, 'data.generated');
 del.sync(data_dirname);
 mkdir.sync(data_dirname);
 
-for (const category of Object.keys(category_maps)) {
+for (const category of Object.keys(category_maps).filter(is_supported)) {
   const sub_dirname = path.join(data_dirname, category);
   fs.mkdirSync(sub_dirname);
 
@@ -55,8 +58,8 @@ for (const category of Object.keys(category_maps)) {
     fs.writeFileSync(
       `${filename}.json`,
       JSON.stringify(
-        content.data.map(
-          ([start, end]) => (start === end ? start : [start, end]),
+        content.data.map(([start, end]) =>
+          start === end ? start : [start, end],
         ),
       ),
     );
