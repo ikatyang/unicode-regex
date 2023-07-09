@@ -1,5 +1,7 @@
-coverage/
-lib/
-node_modules/
+/.vscode/
+/coverage/
+/lib/
+/node_modules/
+
 *.generated/
 *.generated.*

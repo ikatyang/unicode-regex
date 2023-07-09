@@ -1,8 +1,7 @@
 # unicode-regex
 
 [![npm](https://img.shields.io/npm/v/unicode-regex.svg)](https://www.npmjs.com/package/unicode-regex)
-[![build](https://img.shields.io/travis/ikatyang/unicode-regex/master.svg)](https://travis-ci.org/ikatyang/unicode-regex/builds)
-[![coverage](https://img.shields.io/codecov/c/github/ikatyang/unicode-regex/master.svg)](https://codecov.io/gh/ikatyang/unicode-regex)
+[![build](https://img.shields.io/github/actions/workflow/status/ikatyang/unicode-regex/test.yml)](https://github.com/ikatyang/unicode-regex/actions?query=branch%3Amaster)
 
 regular expression for matching unicode category.
 
@@ -11,30 +10,26 @@ regular expression for matching unicode category.
 ## Install
 
 ```sh
-# using npm
-npm install --save unicode-regex
-
-# using yarn
-yarn add unicode-regex
+npm install unicode-regex
 ```
 
 ## Usage
 
 ```js
-const unicode = require('unicode-regex');
+import unicode from 'unicode-regex'
 
-const regex = unicode({ General_Category: ['Punctuation'] }).toRegExp();
-regex.test('a'); //=> false
-regex.test('"'); //=> true
-regex.test('“'); //=> true
+const regex = unicode({ General_Category: ['Punctuation'] }).toRegExp()
+regex.test('a') //=> false
+regex.test('"') //=> true
+regex.test('“') //=> true
 ```
 
 ## API
 
 ```ts
 declare function unicode(categories: {
-  [category: string]: SubCategory[];
-}): Charset;
+  [category: string]: SubCategory[]
+}): Charset
 ```
 
 Returns a [Charset](https://github.com/ikatyang/regexp-util#charset) for further processing, e.g. union, intersect, etc.
@@ -45,13 +40,13 @@ Returns a [Charset](https://github.com/ikatyang/regexp-util#charset) for further
 
 ```sh
 # lint
-yarn run lint
+pnpm run lint
 
 # build
-yarn run build
+pnpm run build
 
 # test
-yarn run test
+pnpm run test
 ```
 
 ## License
