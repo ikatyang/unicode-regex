@@ -1,13 +1,13 @@
 {
   "name": "unicode-regex",
+  "type": "module",
   "version": "3.0.0",
   "description": "regular expression for matching unicode category",
   "keywords": [
     "regular-expression",
     "unicode"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "exports": "./lib/index.js",
   "repository": "https://github.com/ikatyang/unicode-regex",
   "homepage": "https://github.com/ikatyang/unicode-regex#readme",
   "author": {
@@ -17,44 +17,36 @@
   },
   "license": "MIT",
   "scripts": {
-    "prepublish": "yarn run build",
-    "lint": "tslint -p ./tsconfig.json --type-check",
-    "test": "jest",
-    "generate": "ts-node ./scripts/generate.ts",
-    "prebuild": "rm -rf ./lib",
-    "build": "yarn run generate && tsc -p ./tsconfig.build.json",
-    "postbuild": "cp -r ./src/data.generated ./lib",
+    "prepack": "pnpm run build",
+    "lint": "prettier --check .",
+    "check": "tsc --noEmit",
+    "test": "vitest",
+    "build": "vite-node ./scripts/generate.ts && tsc -p ./tsconfig.build.json",
     "release": "standard-version"
   },
   "dependencies": {
-    "regexp-util": "^1.2.0"
+    "regexp-util": "^2.0.0"
   },
   "devDependencies": {
-    "@types/del": "3.0.1",
-    "@types/jest": "21.1.10",
-    "@types/make-dir": "1.0.3",
-    "@types/node": "8.10.59",
-    "@types/prettier": "1.18.3",
-    "del": "3.0.0",
-    "jest": "21.2.1",
-    "make-dir": "1.3.0",
-    "prettier": "1.19.1",
-    "prettier-config-ikatyang": "1.1.1",
-    "standard-version": "4.4.0",
-    "ts-jest": "21.2.4",
-    "ts-node": "4.1.0",
-    "tslint": "5.20.1",
-    "tslint-config-ikatyang": "2.5.1",
-    "tslint-config-prettier": "1.18.0",
-    "tslint-plugin-prettier": "2.0.1",
-    "typescript": "2.9.2",
-    "unicode-12.1.0": "0.8.0"
+    "@types/node": "18.16.19",
+    "@vitest/coverage-v8": "0.33.0",
+    "del": "7.0.0",
+    "make-dir": "4.0.0",
+    "prettier": "3.0.0",
+    "standard-version": "9.5.0",
+    "typescript": "5.1.6",
+    "unicode-12.1.0": "0.8.0",
+    "vite": "4.4.2",
+    "vite-node": "0.33.0",
+    "vitest": "0.33.0"
   },
   "engines": {
     "node": ">= 4"
   },
   "files": [
     "/lib/**/*",
+    "/CHANGELOG.md",
     "/ThirdPartyNoticeText.txt"
-  ]
+  ],
+  "packageManager": "pnpm@8.6.6"
 }
