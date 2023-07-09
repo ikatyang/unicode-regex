@@ -1,6 +1,21 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+# [4.0.0](https://github.com/ikatyang/unicode-regex/compare/v3.0.0...v4.0.0) (2023-07-09)
+
+### Build System
+
+- update infra ([#298](https://github.com/ikatyang/unicode-regex/issues/298)) ([4270f16](https://github.com/ikatyang/unicode-regex/commit/4270f16ae9d679a93a1dffc08700568452c162dd))
+
+### Features
+
+- support Unicode 15.0.0 ([#299](https://github.com/ikatyang/unicode-regex/issues/299)) ([775d18e](https://github.com/ikatyang/unicode-regex/commit/775d18e4ecf693689b421cf3d41cdfd496af4eb2))
+
+### BREAKING CHANGES
+
+- upgrade Unicode data from v12.1.0 to v15.0.0
+- this package is now pure ESM
 
 <a name="3.0.0"></a>
 
