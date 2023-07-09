@@ -41,7 +41,7 @@
     "vitest": "0.33.0"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">=16"
   },
   "files": [
     "/lib/**/*",
