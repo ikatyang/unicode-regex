@@ -6,11 +6,12 @@ import mkdir from 'make-dir'
 import { format } from 'prettier'
 import { Charset } from 'regexp-util'
 
-const dataId = 'unicode-12.1.0'
+const dataId = '@unicode/unicode-15.0.0'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const require = async <T>(id: string) => (await import(id)).default as T
 
-const isSupported = (category: string) => category !== 'Sequence_Property'
+const isSupported = (category: string) =>
+  !['Names', 'Sequence_Property'].includes(category)
 
 const categoryMaps: Record<string, string[]> = await require(dataId)
 const srcDirname = path.resolve(__dirname, '../src')
