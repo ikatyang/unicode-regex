@@ -6,7 +6,7 @@ import mkdir from 'make-dir'
 import { format } from 'prettier'
 import { Charset } from 'regexp-util'
 
-const dataId = '@unicode/unicode-15.1.0'
+const dataId = '@unicode/unicode-16.0.0'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const require = async <T>(id: string) => (await import(id)).default as T
 
@@ -46,23 +46,32 @@ const categories = Object.keys(categoryMaps).filter(isSupported)
 
 await writeFile(
   path.join(dataDirname, 'index.ts'),
-  categories.map(_ => `export * as ${_} from './${_}/index.js'`).join('\n'),
+  categories
+    .map(_ => `export {default as ${_}} from './${_}/index.js'`)
+    .join('\n'),
 )
 
 for (const category of categories) {
   const subDirname = path.join(dataDirname, category)
   await mkdir(subDirname)
 
-  await writeFile(
-    path.join(subDirname, 'index.ts'),
-    categoryMaps[category].length === 0
-      ? 'export {}'
-      : categoryMaps[category]
-          .map(_ => [`export { default as ${_} } from './${_}.js'`])
-          .join('\n'),
-  )
+  const subCategories = categoryMaps[category]
+  const code = [
+    ...subCategories.map(
+      (subCategory, index) =>
+        `import { default as $${index} } from './${subCategory}.js';`,
+    ),
+    '',
+    `export default {
+${subCategories
+  .map((subCategory, index) => `  ${JSON.stringify(subCategory)}: $${index},`)
+  .join('\n')}
+};`,
+  ].join('\n')
 
-  for (const subCategory of categoryMaps[category]) {
+  await writeFile(path.join(subDirname, 'index.ts'), code)
+
+  for (const subCategory of subCategories) {
     const filename = path.join(subDirname, subCategory)
     let content = new Charset()
 
