@@ -16,7 +16,7 @@ importers:
         specifier: 18.16.19
         version: 18.16.19
       '@unicode/unicode-16.0.0':
-        specifier: ^1.6.5
+        specifier: 1.6.5
         version: 1.6.5
       '@vitest/coverage-v8':
         specifier: 0.33.0
