@@ -3,7 +3,7 @@ import { Category } from './types.generated.js'
 import * as data from './data.generated/index.js'
 
 export default function unicode(categories: Partial<Category>): Charset {
-  const keys = Object.keys(categories) as Array<keyof Category>
+  const keys = Object.keys(categories) as (keyof Category)[]
 
   if (keys.length === 0) {
     throw new Error(`Expected at least one category, but received 0.`)
@@ -19,7 +19,7 @@ export default function unicode(categories: Partial<Category>): Charset {
   }
 
   const charsets = keys.map(key => {
-    const subCategories: Array<Category[typeof key][number]> = categories[key]!
+    const subCategories: Category[typeof key][number][] = categories[key]!
     const subCharsets = subCategories.map(_ => getCharset(key, _))
     return new Charset().union(...subCharsets)
   })
@@ -32,7 +32,7 @@ function getCharset<C extends keyof Category>(
   subCategory: Category[C][number],
 ) {
   const categoryData = data[category]
-  const charsetInputs: Array<number | [number, number]> =
+  const charsetInputs: (number | [number, number])[] =
     categoryData[subCategory as keyof typeof categoryData]
   return new Charset().union(...charsetInputs)
 }

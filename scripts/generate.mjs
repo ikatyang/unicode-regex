@@ -16,10 +16,8 @@ const unSupportedCategories = new Set([
   'Special_Casing',
 ])
 const sourceDirectory = new URL('../src/', import.meta.url)
-const categories = new Map(
-  Object.entries(unicodeData).filter(
-    ([category]) => !unSupportedCategories.has(category),
-  ),
+const categories = Object.entries(unicodeData).filter(
+  ([category]) => !unSupportedCategories.has(category),
 )
 
 async function writeFile(file, code) {
@@ -38,7 +36,7 @@ await writeFile(
   typesFilename,
   outdent`
     export interface Category {
-      ${[...categories.entries()]
+      ${categories
         .map(([category, subCategories]) => {
           const types =
             subCategories.length === 0
@@ -61,9 +59,9 @@ await fs.rm(dataDirectory, { recursive: true, force: true })
 
 await writeFile(
   new URL('./index.ts', dataDirectory),
-  [...categories.keys()]
+  categories
     .map(
-      subCategory =>
+      ([subCategory]) =>
         `export * as ${subCategory} from './${subCategory}/index.js';`,
     )
     .join('\n'),
