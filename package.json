@@ -29,13 +29,13 @@
   },
   "devDependencies": {
     "@types/node": "18.16.19",
+    "@unicode/unicode-16.0.0": "^1.6.5",
     "@vitest/coverage-v8": "0.33.0",
     "del": "7.0.0",
     "make-dir": "4.0.0",
     "prettier": "3.0.0",
     "standard-version": "9.5.0",
     "typescript": "5.1.6",
-    "@unicode/unicode-15.1.0": "1.5.2",
     "vite": "4.4.2",
     "vite-node": "0.33.0",
     "vitest": "0.33.0"

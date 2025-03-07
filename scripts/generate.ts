@@ -6,7 +6,7 @@ import mkdir from 'make-dir'
 import { format } from 'prettier'
 import { Charset } from 'regexp-util'
 
-const dataId = '@unicode/unicode-15.1.0'
+const dataId = '@unicode/unicode-16.0.0'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const require = async <T>(id: string) => (await import(id)).default as T
 
