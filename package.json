@@ -21,24 +21,23 @@
     "lint": "prettier --check .",
     "check": "tsc --noEmit",
     "test": "vitest",
-    "build": "vite-node ./scripts/generate.ts && tsc -p ./tsconfig.build.json",
+    "build": "vite-node ./scripts/generate.mjs && tsc -p ./tsconfig.build.json",
     "release": "standard-version"
   },
   "dependencies": {
-    "regexp-util": "^2.0.0"
+    "regexp-util": "^2.0.1"
   },
   "devDependencies": {
-    "@types/node": "18.16.19",
+    "@types/node": "22.13.9",
     "@unicode/unicode-16.0.0": "1.6.5",
-    "@vitest/coverage-v8": "0.33.0",
-    "del": "7.0.0",
-    "make-dir": "4.0.0",
-    "prettier": "3.0.0",
+    "@vitest/coverage-v8": "3.0.8",
+    "outdent": "^0.8.0",
+    "prettier": "3.5.3",
     "standard-version": "9.5.0",
-    "typescript": "5.1.6",
-    "vite": "4.4.2",
-    "vite-node": "0.33.0",
-    "vitest": "0.33.0"
+    "typescript": "5.8.2",
+    "vite": "6.2.1",
+    "vite-node": "3.0.8",
+    "vitest": "3.0.8"
   },
   "engines": {
     "node": ">=16"

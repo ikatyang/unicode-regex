@@ -1,5 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`throw if no category 1`] = `"Expected at least one category, but received 0."`;
+exports[`throw if no category 1`] = `[Error: Expected at least one category, but received 0.]`;
 
-exports[`throw if no sub category 1`] = `"Expected at least one sub category, but received 0."`;
+exports[`throw if no sub category 1`] = `[Error: Expected at least one sub category, but received 0.]`;
