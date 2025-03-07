@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import * as prettier from 'prettier'
+import { outdent } from 'outdent'
 import { Charset } from 'regexp-util'
 
 const dataId = '@unicode/unicode-16.0.0'
@@ -23,17 +24,23 @@ async function writeFile(file: URL, code: string) {
 const typesFilename = new URL('./types.generated.ts', sourceDirectory)
 await writeFile(
   typesFilename,
-  `export interface Category {${Object.keys(categoryMaps)
-    .filter(isSupported)
-    .map(category => {
-      const subCategories = categoryMaps[category]
-      return `${JSON.stringify(category)}: Array<${
-        subCategories.length === 0
-          ? 'never'
-          : subCategories.map(x => JSON.stringify(x)).join('|')
-      }>`
-    })
-    .join(';')}}`,
+  outdent`
+    export interface Category {
+      ${Object.keys(categoryMaps)
+        .filter(isSupported)
+        .map(category => {
+          const subCategories = categoryMaps[category]
+          const types =
+            subCategories.length === 0
+              ? 'never'
+              : `(${subCategories
+                  .map(subCategory => `| ${JSON.stringify(subCategory)}`)
+                  .join('\n')})[]`
+          return `${JSON.stringify(category)}: ${types};`
+        })
+        .join('\n')}
+    };
+  `,
 )
 
 /* ----------------------------- data.generated ----------------------------- */
@@ -63,11 +70,16 @@ for (const category of categories) {
         `import { default as $${index} } from './${subCategory}.js';`,
     ),
     '',
-    `export default {
-${subCategories
-  .map((subCategory, index) => `  ${JSON.stringify(subCategory)}: $${index},`)
-  .join('\n')}
-};`,
+    outdent`
+      export default {
+      ${subCategories
+        .map(
+          (subCategory, index) =>
+            `  ${JSON.stringify(subCategory)}: $${index},`,
+        )
+        .join('\n')}
+      };
+    `,
   ].join('\n')
 
   await writeFile(new URL('./index.ts', categoryDirectory), code)
@@ -86,14 +98,15 @@ ${subCategories
 
     await writeFile(
       filename,
-      [
-        `const _: Array<number | [number, number]> = ${JSON.stringify(
+      outdent`
+        const _: (number | [number, number])[] = ${JSON.stringify(
           content.data.map(([start, end]) =>
             start === end ? start : [start, end],
           ),
-        )}`,
-        `export default _`,
-      ].join('\n'),
+        )};
+
+        export default _;
+      `,
     )
   }
 }
