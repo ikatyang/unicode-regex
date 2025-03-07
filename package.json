@@ -21,7 +21,7 @@
     "lint": "prettier --check .",
     "check": "tsc --noEmit",
     "test": "vitest",
-    "build": "vite-node ./scripts/generate.ts && tsc -p ./tsconfig.build.json",
+    "build": "vite-node ./scripts/generate.mjs && tsc -p ./tsconfig.build.json",
     "release": "standard-version"
   },
   "dependencies": {
