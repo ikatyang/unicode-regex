@@ -1,9 +1,7 @@
-import { writeFile } from 'node:fs/promises'
+import fs from 'node:fs/promises'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { deleteAsync } from 'del'
-import mkdir from 'make-dir'
-import { format } from 'prettier'
+import * as prettier from 'prettier'
 import { Charset } from 'regexp-util'
 
 const dataId = '@unicode/unicode-16.0.0'
@@ -16,44 +14,49 @@ const isSupported = (category: string) =>
 const categoryMaps: Record<string, string[]> = await require(dataId)
 const srcDirname = path.resolve(__dirname, '../src')
 
+async function writeFile(file: string, code: string) {
+  const directory = path.dirname(file)
+  await fs.mkdir(directory, { recursive: true })
+  await fs.writeFile(
+    file,
+    await prettier.format(code, { parser: 'typescript' }),
+  )
+}
+
 /* ----------------------------- types.generated ---------------------------- */
 
 const typesFilename = path.join(srcDirname, 'types.generated.ts')
 await writeFile(
   typesFilename,
-  await format(
-    `export interface Category {${Object.keys(categoryMaps)
-      .filter(isSupported)
-      .map(category => {
-        const subCategories = categoryMaps[category]
-        return `${JSON.stringify(category)}: Array<${
-          subCategories.length === 0
-            ? 'never'
-            : subCategories.map(x => JSON.stringify(x)).join('|')
-        }>`
-      })
-      .join(';')}}`,
-    { parser: 'typescript' },
-  ),
+  `export interface Category {${Object.keys(categoryMaps)
+    .filter(isSupported)
+    .map(category => {
+      const subCategories = categoryMaps[category]
+      return `${JSON.stringify(category)}: Array<${
+        subCategories.length === 0
+          ? 'never'
+          : subCategories.map(x => JSON.stringify(x)).join('|')
+      }>`
+    })
+    .join(';')}}`,
 )
 
 /* ----------------------------- data.generated ----------------------------- */
 
 const dataDirname = path.join(srcDirname, 'data.generated')
-await deleteAsync(dataDirname)
-await mkdir(dataDirname)
 const categories = Object.keys(categoryMaps).filter(isSupported)
+
+await fs.rm(dataDirname, { recursive: true, force: true })
 
 await writeFile(
   path.join(dataDirname, 'index.ts'),
   categories
-    .map(_ => `export {default as ${_}} from './${_}/index.js'`)
+    .map(subCategory => `export {default as ${subCategory}} from './${subCategory}/index.js';`)
     .join('\n'),
 )
 
 for (const category of categories) {
   const subDirname = path.join(dataDirname, category)
-  await mkdir(subDirname)
 
   const subCategories = categoryMaps[category]
   const code = [
