@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       regexp-util:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
     devDependencies:
       '@types/node':
         specifier: 18.16.19
@@ -1046,8 +1046,8 @@ packages:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
 
-  regexp-util@2.0.0:
-    resolution: {integrity: sha512-HbLDPF+RkBiPjlzmU0hnUQd4abs56JiA2riHxNVfxjagcGwIy3Xhc2Yyx2+0/p5QeM0kj270nEOlTj57HvWXFA==}
+  regexp-util@2.0.1:
+    resolution: {integrity: sha512-ypiNkox7KnhJyAlHbcC1D4O2fnFgjUbb4jUH6a5FWJxDakcmQqOQIa5HWhhqlRJbBHmbFuuPi7almKKGkaQbrA==}
     engines: {node: '>=16'}
 
   require-directory@2.1.1:
@@ -1213,9 +1213,6 @@ packages:
   trim-newlines@3.0.1:
     resolution: {integrity: sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==}
     engines: {node: '>=8'}
-
-  tslib@2.6.0:
-    resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
 
   type-detect@4.0.8:
     resolution: {integrity: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==}
@@ -2353,9 +2350,7 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
-  regexp-util@2.0.0:
-    dependencies:
-      tslib: 2.6.0
+  regexp-util@2.0.1: {}
 
   require-directory@2.1.1: {}
 
@@ -2512,8 +2507,6 @@ snapshots:
       is-number: 7.0.0
 
   trim-newlines@3.0.1: {}
-
-  tslib@2.6.0: {}
 
   type-detect@4.0.8: {}
 

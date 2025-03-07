@@ -25,7 +25,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "regexp-util": "^2.0.0"
+    "regexp-util": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "18.16.19",
