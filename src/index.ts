@@ -19,8 +19,11 @@ export default function unicode(categories: Partial<Category>): Charset {
   }
 
   const charsets = keys.map(category => {
-    const subCategories: Category[typeof category][number][] = categories[category]!
-    const subCharsets = subCategories.map(subCategory => getCharset(category, subCategory))
+    const subCategories: Category[typeof category][number][] =
+      categories[category]!
+    const subCharsets = subCategories.map(subCategory =>
+      getCharset(category, subCategory),
+    )
     return new Charset().union(...subCharsets)
   })
 
@@ -32,7 +35,8 @@ function getCharset<CategoryName extends keyof Category>(
   subCategory: Category[CategoryName][number],
 ) {
   const categoryData = data[category]
-  const charsetInputs =
-    categoryData[subCategory as keyof typeof categoryData] as (number | [number, number])[]
+  const charsetInputs = categoryData[
+    subCategory as keyof typeof categoryData
+  ] as (number | [number, number])[]
   return new Charset().union(...charsetInputs)
 }
