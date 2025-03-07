@@ -56,25 +56,20 @@ for (const category of categories) {
   await mkdir(subDirname)
 
   const subCategories = categoryMaps[category]
-  if (category === 'Special_Casing') {
-    const code = [
-      ...subCategories.map(
-        (subCategory, index) =>
-          `import { default as $${index} } from './${subCategory}.js';`,
-      ),
-      '',
-      `export default {
+  const code = [
+    ...subCategories.map(
+      (subCategory, index) =>
+        `import { default as $${index} } from './${subCategory}.js';`,
+    ),
+    '',
+    `export default {
 ${subCategories
-  .map(
-    (subCategory, index) =>
-      '  ' + JSON.stringify(subCategory) + ': ' + `$${index}`,
-  )
+  .map((subCategory, index) => `  ${JSON.stringify(subCategory)}: $${index},`)
   .join('\n')}
 };`,
-    ].join('\n')
+  ].join('\n')
 
-    await writeFile(path.join(subDirname, 'index.ts'), code)
-  }
+  await writeFile(path.join(subDirname, 'index.ts'), code)
 
   for (const subCategory of subCategories) {
     const filename = path.join(subDirname, subCategory)
