@@ -1,11 +1,11 @@
 # unicode-regex
 
 [![npm](https://img.shields.io/npm/v/unicode-regex.svg)](https://www.npmjs.com/package/unicode-regex)
-[![build](https://img.shields.io/github/actions/workflow/status/ikatyang/unicode-regex/test.yml)](https://github.com/ikatyang/unicode-regex/actions?query=branch%3Amaster)
+[![build](https://img.shields.io/github/actions/workflow/status/ikatyang/unicode-regex/test.yml)](https://github.com/ikatyang/unicode-regex/actions?query=branch%3Amain)
 
 regular expression for matching unicode category.
 
-[Changelog](https://github.com/ikatyang/unicode-regex/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/ikatyang/unicode-regex/blob/main/CHANGELOG.md)
 
 ## Install
 
