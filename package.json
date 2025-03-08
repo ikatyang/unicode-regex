@@ -8,8 +8,8 @@
     "unicode"
   ],
   "exports": "./lib/index.js",
-  "repository": "https://github.com/ikatyang/unicode-regex",
-  "homepage": "https://github.com/ikatyang/unicode-regex#readme",
+  "repository": "https://github.com/ikatyang-collab/unicode-regex",
+  "homepage": "https://github.com/ikatyang-collab/unicode-regex#readme",
   "author": {
     "name": "Ika",
     "email": "ikatyang@gmail.com",
